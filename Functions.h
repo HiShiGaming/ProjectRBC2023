@@ -1,4 +1,4 @@
-//Thư viện khai báo hàm
+//Thư viện tạo hàm
 #include "declaretions.h"
 void up() 
 {
