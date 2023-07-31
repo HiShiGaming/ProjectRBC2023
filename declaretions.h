@@ -1,3 +1,4 @@
+//Thư Viện khai báo chân động cơ và setup
 #include <ESP32_Servo.h>
 #include "BluetoothSerial.h"
 // Khai báo chân động cơ
