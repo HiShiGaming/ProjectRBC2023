@@ -1,7 +1,23 @@
-//Thư viện tạo hàm
 #include "declaretions.h"
+void tang_toc(int pwmValue,int MaxpwmValue)
+{
+  if (pwmValue<=MaxpwmValue)
+  {
+  pwmValue+=(MaxpwmValue / 10);
+  Serial.println(pwmValue);
+  }
+}
+void giam_toc(int pwmValue)
+{
+  if (pwmValue>=0)
+  {
+  pwmValue-=(MaxpwmValue / 10);
+  Serial.println(pwmValue);
+  }
+}
 void up() 
 {
+  tang_toc(pwmValue,MaxpwmValue);
   analogWrite(Motor1Pin1, pwmValue);
   analogWrite(Motor1Pin2, LOW);
   analogWrite(Motor2Pin1, LOW);
@@ -10,6 +26,7 @@ void up()
 
 void back() 
 {
+  giam_toc(pwmValue);
   analogWrite(Motor1Pin1, LOW);
   analogWrite(Motor1Pin2, pwmValue);
   analogWrite(Motor2Pin1, pwmValue);
@@ -68,3 +85,4 @@ void ham_ha()
   analogWrite(Motor3Pin1, 240);
   analogWrite(Motor3Pin2, 0);
 }
+
