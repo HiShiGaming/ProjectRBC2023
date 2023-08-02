@@ -1,44 +1,87 @@
 #include "declaretions.h"
-void tang_toc(int pwmValue,int MaxpwmValue)
+int valplus(int val)
+{
+  if (val<20)
+  {
+    val+=1;
+  }
+  return val;
+}
+int valminus(int val)
+{
+  if (val>0)
+  {
+    val-=1;
+  }
+  return val;
+}
+void tang_toc(unsigned char pwmValue,unsigned char MaxpwmValue)
 {
   if (pwmValue<=MaxpwmValue)
   {
-  pwmValue+=(MaxpwmValue / 10);
-  Serial.println(pwmValue);
+    for (unsigned char pwmValue;pwmValue<=MaxpwmValue;pwmValue+=(MaxpwmValue / 10),delay(600)) 
+      {
+      Serial.println(pwmValue);
+      }
   }
 }
-void giam_toc(int pwmValue)
+void giam_toc(unsigned char pwmValue)
 {
   if (pwmValue>=0)
   {
-  pwmValue-=(MaxpwmValue / 10);
-  Serial.println(pwmValue);
+    for (unsigned char pwmValue;pwmValue>=0;pwmValue-=(MaxpwmValue / 10),delay(600)) 
+      {
+      Serial.println(pwmValue);
+      }
   }
 }
-void up() 
+int fast(unsigned char pwmValue,int MaxpwnValue,int val)
+{ 
+  if (pwmValue>MaxpwmValue)
+  {
+    pwmValue=MaxpwmValue;
+  }
+  if (pwmValue<MaxpwmValue)
+  {
+    pwmValue=map(val,0,20,0,MaxpwmValue);
+  }
+  return pwmValue;
+}
+int slow(unsigned char pwmValue,unsigned char MaxpwmValue,int val)
+{ 
+  if (pwmValue>0)
+  {
+    pwmValue=map(val,0,20,0,MaxpwmValue);
+  }
+  return pwmValue;
+}
+int up(unsigned char pwmValue,unsigned char MaxpwmValue,int val) 
 {
-  tang_toc(pwmValue,MaxpwmValue);
+  fast(pwmValue,MaxpwmValue,val);
   analogWrite(Motor1Pin1, pwmValue);
   analogWrite(Motor1Pin2, LOW);
   analogWrite(Motor2Pin1, LOW);
   analogWrite(Motor2Pin2, pwmValue);
+  return fast(pwmValue,MaxpwmValue,val);
 }
 
-void back() 
+int back(unsigned char pwmValue,unsigned char MaxpwmValue,int val) 
 {
-  giam_toc(pwmValue);
+  fast(pwmValue,MaxpwmValue,val);
   analogWrite(Motor1Pin1, LOW);
   analogWrite(Motor1Pin2, pwmValue);
   analogWrite(Motor2Pin1, pwmValue);
   analogWrite(Motor2Pin2, LOW);
+  return fast(pwmValue,MaxpwmValue,val);
 }
 
-void dung() 
+unsigned char  dung() 
 {
   analogWrite(Motor1Pin1, LOW);
   analogWrite(Motor1Pin2, LOW);
   analogWrite(Motor2Pin1, LOW);
   analogWrite(Motor2Pin2, LOW);
+  return pwmValue=0;
 }
 
 void turnleft() 
