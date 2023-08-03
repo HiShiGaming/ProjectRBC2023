@@ -12,64 +12,67 @@ void loop()
     if (Serial.available()) 
     {
     char receivedChar = Serial.read();
-    switch (receivedChar) 
-      {
+      switch (receivedChar) 
+        {
         case 'A':
-            MaxpwmValue = 0;
+            MaxpwmValue = pwmValue_0();
             Serial.println(MaxpwmValue);
             break;
         case 'S':
-            MaxpwmValue = 28;
+            MaxpwmValue = pwmValue_28();
             Serial.println(MaxpwmValue);
             break;
         case 'D':
-            MaxpwmValue = 56;
+            MaxpwmValue = pwmValue_56();
             Serial.println(MaxpwmValue);
             break;
         case 'F':
-            MaxpwmValue = 84;
+            MaxpwmValue = pwmValue_84();
             Serial.println(MaxpwmValue);
             break;
         case 'G':
-            MaxpwmValue = 112;
+            MaxpwmValue = pwmValue_112();
             Serial.println(MaxpwmValue);
             break;
         case 'H':
-            MaxpwmValue = 140;
+            MaxpwmValue = pwmValue_140();
             Serial.println(MaxpwmValue);
             break;
         case 'J':
-            MaxpwmValue = 168;
+            MaxpwmValue = pwmValue_168();
             Serial.println(MaxpwmValue);
             break;
         case 'K':
-            MaxpwmValue = 196;
+            MaxpwmValue = pwmValue_196();
             Serial.println(MaxpwmValue);
             break;
         case 'L':
-            MaxpwmValue = 224;
+            MaxpwmValue = pwmValue_224();
             Serial.println(MaxpwmValue);
             break;
         case 'M':
-            MaxpwmValue = 255;
+            MaxpwmValue = pwmValue_255();
             Serial.println(MaxpwmValue);
             break;
         //***************************************************//
         case 'Q':
           // Xử lý cho trường hợp nhận được ký tự 'Q'
-          Serial.println("Tien");
-          val=(valplus(val));
-          up(pwmValue,MaxpwmValue,val);
-          pwmValue=up(pwmValue,MaxpwmValue,val);
-          Serial.println(pwmValue);
+          while (pwmValue<MaxpwmValue)
+          {
+            delay(50);
+            pwmValue+=1;
+            up();
+            Serial.println(pwmValue);
+          }
           break;
         case 'W':
-          // Xử lý cho trường hợp nhận được ký tự 'W'
-          Serial.println("Lui");
-          val=(valplus(val));
-          back(pwmValue,MaxpwmValue,val);
-          pwmValue=back(pwmValue,MaxpwmValue,val);
-          Serial.println(pwmValue);
+          while (pwmValue<MaxpwmValue)
+          {
+            delay(50);
+            pwmValue+=1;
+            back();
+            Serial.println(pwmValue);
+          }
           break;
         case 'E':
           // Xử lý cho trường hợp nhận được ký tự 'E'
@@ -115,76 +118,95 @@ void loop()
           myservo.write(180);
           Serial.println("P");
       }
-    }
-
+      }
     // Kiểm tra giá trị của Bluetooth7
     if (SerialBT.available()) 
     {
     char receivedChar = SerialBT.read();
+    if (receivedChar =='Q' && pwmValue<MaxpwmValue)
+    {
+        delay(50);
+        pwmValue+=1;
+        up();
+        Serial.println(pwmValue);
+    }
+    if (receivedChar== 'W' && pwmValue<MaxpwmValue)
+    {
+        delay(50);
+        pwmValue+=1;
+        back();
+        Serial.println(pwmValue);
+    }
+      
     switch (receivedChar) 
-      {
+    {
         case 'A':
-            MaxpwmValue = 0;
+            MaxpwmValue = pwmValue_0();
             Serial.println(MaxpwmValue);
             break;
         case 'S':
-            MaxpwmValue = 28;
+            MaxpwmValue = pwmValue_28();
             Serial.println(MaxpwmValue);
             break;
         case 'D':
-            MaxpwmValue = 56;
+            MaxpwmValue = pwmValue_56();
             Serial.println(MaxpwmValue);
             break;
         case 'F':
-            MaxpwmValue = 84;
+            MaxpwmValue = pwmValue_84();
             Serial.println(MaxpwmValue);
             break;
         case 'G':
-            MaxpwmValue = 112;
+            MaxpwmValue = pwmValue_112();
             Serial.println(MaxpwmValue);
             break;
         case 'H':
-            MaxpwmValue = 140;
+            MaxpwmValue = pwmValue_140();
             Serial.println(MaxpwmValue);
             break;
         case 'J':
-            MaxpwmValue = 168;
+            MaxpwmValue = pwmValue_168();
             Serial.println(MaxpwmValue);
             break;
         case 'K':
-            MaxpwmValue = 196;
+            MaxpwmValue = pwmValue_196();
             Serial.println(MaxpwmValue);
             break;
         case 'L':
-            MaxpwmValue = 224;
+            MaxpwmValue = pwmValue_224();
             Serial.println(MaxpwmValue);
             break;
         case 'M':
-            MaxpwmValue = 255;
+            MaxpwmValue = pwmValue_255();
             Serial.println(MaxpwmValue);
             break;
         //***************************************************//
-        case 'Q':
+        //case 'Q':
           // Xử lý cho trường hợp nhận được ký tự 'Q'
-          Serial.println("Tien");
-          val=(valplus(val));
-          up(pwmValue,MaxpwmValue,val);
-          pwmValue=up(pwmValue,MaxpwmValue,val);
-          Serial.println(pwmValue);
+
+          /*while (pwmValue<MaxpwmValue)
+          {
+            delay(50);
+            pwmValue+=1;
+            up();
+            Serial.println(pwmValue);
+          }
           break;
+          
         case 'W':
-          // Xử lý cho trường hợp nhận được ký tự 'W'
-          Serial.println("Lui");
-          val=(valplus(val));
-          back(pwmValue,MaxpwmValue,val);
-          pwmValue=back(pwmValue,MaxpwmValue,val);
-          Serial.println(pwmValue);
+          while (pwmValue<MaxpwmValue)
+          {
+            delay(50);
+            pwmValue+=1;
+            back();
+            Serial.println(pwmValue);
+          }
           break;
+          */
         case 'E':
           // Xử lý cho trường hợp nhận được ký tự 'E'
           Serial.println("Dung");
           dung();
-          pwmValue=(dung());
           break;
         case 'R':
           // Xử lý cho trường hợp nhận được ký tự 'R'
@@ -223,15 +245,14 @@ void loop()
         case 'P':
           myservo.write(180);
           Serial.println("P");
-      }
-    
-    } 
+      } 
+    }
+  }
   else 
-    {
+  {
       dung();
       pwmValue=dung();
       stopservo();
       Serial.println("Vui long ket noi Bluetooth va thu lai !");
-    }
   }
 }
