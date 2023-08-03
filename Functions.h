@@ -1,78 +1,25 @@
 #include "declaretions.h"
-int valplus(int val)
+
+void up() 
 {
-  if (val<20)
-  {
-    val+=1;
-  }
-  return val;
-}
-int valminus(int val)
-{
-  if (val>0)
-  {
-    val-=1;
-  }
-  return val;
-}
-void tang_toc(unsigned char pwmValue,unsigned char MaxpwmValue)
-{
-  if (pwmValue<=MaxpwmValue)
-  {
-    for (unsigned char pwmValue;pwmValue<=MaxpwmValue;pwmValue+=(MaxpwmValue / 10),delay(600)) 
-      {
-      Serial.println(pwmValue);
-      }
-  }
-}
-void giam_toc(unsigned char pwmValue)
-{
-  if (pwmValue>=0)
-  {
-    for (unsigned char pwmValue;pwmValue>=0;pwmValue-=(MaxpwmValue / 10),delay(600)) 
-      {
-      Serial.println(pwmValue);
-      }
-  }
-}
-int fast(unsigned char pwmValue,int MaxpwnValue,int val)
-{ 
-  if (pwmValue>MaxpwmValue)
-  {
-    pwmValue=MaxpwmValue;
-  }
-  if (pwmValue<MaxpwmValue)
-  {
-    pwmValue=map(val,0,20,0,MaxpwmValue);
-  }
-  return pwmValue;
-}
-int slow(unsigned char pwmValue,unsigned char MaxpwmValue,int val)
-{ 
-  if (pwmValue>0)
-  {
-    pwmValue=map(val,0,20,0,MaxpwmValue);
-  }
-  return pwmValue;
-}
-int up(unsigned char pwmValue,unsigned char MaxpwmValue,int val) 
-{
-  fast(pwmValue,MaxpwmValue,val);
+  //fast(pwmValue,MaxpwmValue,val);
   analogWrite(Motor1Pin1, pwmValue);
   analogWrite(Motor1Pin2, LOW);
   analogWrite(Motor2Pin1, LOW);
   analogWrite(Motor2Pin2, pwmValue);
-  return fast(pwmValue,MaxpwmValue,val);
+  //return fast(pwmValue,MaxpwmValue,val);
+  return;
 }
 
-int back(unsigned char pwmValue,unsigned char MaxpwmValue,int val) 
+void back() 
 {
-  fast(pwmValue,MaxpwmValue,val);
+  //fast(pwmValue,MaxpwmValue,val);
   analogWrite(Motor1Pin1, LOW);
   analogWrite(Motor1Pin2, pwmValue);
   analogWrite(Motor2Pin1, pwmValue);
   analogWrite(Motor2Pin2, LOW);
-  return fast(pwmValue,MaxpwmValue,val);
+  //return fast(pwmValue,MaxpwmValue,val);
+  return;
 }
 
 unsigned char  dung() 
@@ -127,5 +74,103 @@ void ham_ha()
 {
   analogWrite(Motor3Pin1, 240);
   analogWrite(Motor3Pin2, 0);
+}
+unsigned char pwmValue_0() {
+  return pwmValue = 0;
+}
+unsigned char pwmValue_28() {
+  return pwmValue = 28;
+}
+unsigned char pwmValue_56() {
+  return pwmValue = 56;
+}
+unsigned char pwmValue_84() {
+  return pwmValue = 84;
+}
+unsigned char pwmValue_112() {
+  return pwmValue = 112;
+}
+unsigned char pwmValue_140() {
+  return pwmValue = 140;
+}
+unsigned char pwmValue_168() {
+  return pwmValue = 168;
+}
+unsigned char pwmValue_196() {
+  return pwmValue = 196;
+}
+unsigned char pwmValue_224() {
+  return pwmValue = 224;
+}
+unsigned char pwmValue_255() {
+  return pwmValue = 255;
+}
+
+void gia_toc_up(unsigned char MaxpwmValue)
+{ 
+  if (pwmValue>=MaxpwmValue)
+  { pwmValue=MaxpwmValue;
+    up();
+    Serial.println(pwmValue);
+    return;
+  }
+  else
+  {
+    for(pwmValue;pwmValue<=MaxpwmValue;pwmValue+=1)
+    {
+      Serial.println(pwmValue);
+      //delay(100);
+      up();
+      if (pwmValue==MaxpwmValue)
+      {
+        break;
+      }
+    }
+  }
+  return;
+}
+
+void gia_toc_back(unsigned char MaxpwmValue)
+{ 
+  if (pwmValue>=MaxpwmValue)
+  { 
+    pwmValue=MaxpwmValue;
+    back();
+    //Serial.println(pwmValue);
+    return;
+  }
+  else
+  {
+    for(pwmValue;pwmValue<=MaxpwmValue;pwmValue+=1)
+    {
+      //Serial.println(pwmValue);
+      //delay(100);
+      back();
+      if(pwmValue==MaxpwmValue)
+      {
+        break;
+      }
+    }
+  }
+  return ;
+}
+
+void test(char receivedChar, unsigned char MaxpwmValue)
+{
+  if(receivedChar == 'Q')
+  { 
+    if (pwmValue>=MaxpwmValue)
+    {
+      pwmValue=MaxpwmValue;
+      up();
+      Serial.println(pwmValue);
+    }
+    else
+    {
+    pwmValue+=1;
+    up();
+    Serial.println(pwmValue);
+    }
+  }
 }
 
