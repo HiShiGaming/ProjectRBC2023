@@ -7,9 +7,8 @@ const int Motor2Pin1    = 33;
 const int Motor2Pin2    = 32;
 const int Motor3Pin1    = 4 ;
 const int Motor3Pin2    = 16;
-// 
-int val                 = 0;
-unsigned char pwmValue  = 0;
+//
+static unsigned char pwmValue  = 0;
 int MaxpwmValue         = 0;
 String device_name      = "Robot";
 BluetoothSerial SerialBT;
