@@ -119,24 +119,17 @@ void loop()
           Serial.println("P");
       }
       }
-    // Kiểm tra giá trị của Bluetooth7
+    // Kiểm tra giá trị của Bluetooth
+
+
+
+
+
+
+
     if (SerialBT.available()) 
     {
     char receivedChar = SerialBT.read();
-    if (receivedChar =='Q' && pwmValue<MaxpwmValue)
-    {
-        delay(50);
-        pwmValue+=1;
-        up();
-        Serial.println(pwmValue);
-    }
-    if (receivedChar== 'W' && pwmValue<MaxpwmValue)
-    {
-        delay(50);
-        pwmValue+=1;
-        back();
-        Serial.println(pwmValue);
-    }
       
     switch (receivedChar) 
     {
@@ -181,28 +174,40 @@ void loop()
             Serial.println(MaxpwmValue);
             break;
         //***************************************************//
-        //case 'Q':
+        case 'Q':
           // Xử lý cho trường hợp nhận được ký tự 'Q'
-
-          /*while (pwmValue<MaxpwmValue)
-          {
-            delay(50);
-            pwmValue+=1;
-            up();
-            Serial.println(pwmValue);
+          if (pwmValue<MaxpwmValue)
+          { 
+            if (val>=20)
+            {
+              val=20;
+            }
+            else
+            {
+              val+=1;
+            }
+            pwmValue=map(val,0,20,0,MaxpwmValue);
           }
+          Serial.println(pwmValue);
+          up();
           break;
           
         case 'W':
-          while (pwmValue<MaxpwmValue)
-          {
-            delay(50);
-            pwmValue+=1;
-            back();
-            Serial.println(pwmValue);
+           if (pwmValue<MaxpwmValue)
+          { 
+            if (val>=20)
+            {
+              val=20;
+            }
+            else
+            {
+              val+=1;
+            }
+            pwmValue=map(val,0,20,0,MaxpwmValue);
           }
+          Serial.println(pwmValue);
+          back();
           break;
-          */
         case 'E':
           // Xử lý cho trường hợp nhận được ký tự 'E'
           Serial.println("Dung");
