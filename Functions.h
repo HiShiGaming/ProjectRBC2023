@@ -28,7 +28,7 @@ unsigned char  dung()
   analogWrite(Motor1Pin2, LOW);
   analogWrite(Motor2Pin1, LOW);
   analogWrite(Motor2Pin2, LOW);
-  return pwmValue=0;
+  return pwmValue=0,val=0;
 }
 
 void turnleft() 
@@ -76,34 +76,34 @@ void ham_ha()
   analogWrite(Motor3Pin2, 0);
 }
 unsigned char pwmValue_0() {
-  return pwmValue = 0;
+  return  MaxpwmValue = 0;
 }
 unsigned char pwmValue_28() {
-  return pwmValue = 28;
+  return  MaxpwmValue = 28;
 }
 unsigned char pwmValue_56() {
-  return pwmValue = 56;
+  return  MaxpwmValue = 56;
 }
 unsigned char pwmValue_84() {
-  return pwmValue = 84;
+  return  MaxpwmValue = 84;
 }
 unsigned char pwmValue_112() {
-  return pwmValue = 112;
+  return  MaxpwmValue = 112;
 }
 unsigned char pwmValue_140() {
-  return pwmValue = 140;
+  return  MaxpwmValue = 140;
 }
 unsigned char pwmValue_168() {
-  return pwmValue = 168;
+  return  MaxpwmValue = 168;
 }
 unsigned char pwmValue_196() {
-  return pwmValue = 196;
+  return  MaxpwmValue = 196;
 }
 unsigned char pwmValue_224() {
-  return pwmValue = 224;
+  return  MaxpwmValue = 224;
 }
 unsigned char pwmValue_255() {
-  return pwmValue = 255;
+  return  MaxpwmValue = 255;
 }
 
 void gia_toc_up(unsigned char MaxpwmValue)
